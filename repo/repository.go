@@ -2,9 +2,11 @@ package repo
 
 import (
 	"context"
+	"fmt"
 	"url-shortener/dto"
 	"url-shortener/interfaces"
 	"url-shortener/model"
+
 	"gorm.io/gorm"
 )
 
@@ -20,17 +22,18 @@ func NewURLShortenerRepository(db *gorm.DB) interfaces.URLShortenerRepository {
 	}
 }
 
-func (r *URLShortenerRepository) ShortenURL(shortUrlRequest dto.ShortenURLRequest, shortUrl string) (string, error) {
+func (r *URLShortenerRepository) ShortenURL(shortUrlRequest dto.ShortenURLRequest, shortUrl string) (dto.ShortenURLResponse, error) {
 	req := model.URL{
 		LongURL:  shortUrlRequest.LongURL,
 		ShortURL: shortUrl,
 		UserID:   shortUrlRequest.UserID,
 	}
 	result := r.db.Create(&req)
+	fmt.Printf("ID: %+v, CreatedAt: %+v, UpdatedAt: %+v\n", req.ID, req.CreatedAt, req.UpdatedAt)
 	if result.Error != nil {
-		return "", result.Error
+		return dto.ShortenURLResponse{}, result.Error
 	}
-	return shortUrl, nil
+	return dto.ShortenURLResponse{ID: int(req.ID), LongURL: req.LongURL, ShortURL: req.ShortURL, UserID: req.UserID, CreatedAt: req.CreatedAt.String(), UpdatedAt: req.UpdatedAt.String()}, nil
 }
 
 func (r *URLShortenerRepository) RedirectUrl(shortURL string, userId int) (dto.ShortenURLResponse, error) {

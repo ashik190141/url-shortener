@@ -12,7 +12,7 @@ func Route(repo interfaces.URLShortenerRepository, service interfaces.URLShorten
 	h := handler.NewUrlShortenerHandler(service, repo)
 
 	router.HandleFunc("/urlShortener/shorten", h.ShortenURLHandler).Methods("POST")
-	router.HandleFunc("/urlShortener/redirect/{shortURL}", h.RedirectUrlHandler).Methods("GET")
+	router.HandleFunc("/urlShortener/redirect", h.RedirectUrlHandler).Methods("GET")
 
 	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(200)

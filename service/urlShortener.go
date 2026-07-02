@@ -31,11 +31,11 @@ func (s *URLShortenerService) ShortenURL(r *http.Request, shortUrlRequest dto.Sh
 	shortUrlDomain := cfg.SHORT_URL_DOMAIN
 	id, _ := s.snowflake.Generate()
 	shortUrl := shortUrlDomain + "short/" + strconv.FormatUint(id, 10)
-	createdShortUrl, err := s.repo.ShortenURL(shortUrlRequest, shortUrl)
+	result, err := s.repo.ShortenURL(shortUrlRequest, shortUrl)
 	if err != nil {
 		return *response.StandardApiResponse(false, http.StatusBadRequest, constant.ShortUrlDoNotCreate, dto.ShortenURLResponse{})
 	}
-	return *response.StandardApiResponse(true, http.StatusCreated, constant.ShortURLCreatedSuccessfully, dto.ShortenURLResponse{ShortURL: createdShortUrl})
+	return *response.StandardApiResponse(true, http.StatusCreated, constant.ShortURLCreatedSuccessfully, result)
 }
 
 func (s *URLShortenerService) RedirectUrl(r *http.Request, shortURL string, userId int) (response.ApiResponse[dto.ShortenURLResponse]) {

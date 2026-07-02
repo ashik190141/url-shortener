@@ -7,13 +7,13 @@ import (
 )
 
 type URLShortenerRepository interface {
-	ShortenURL(shortUrlRequest dto.ShortenURLRequest, shortUrl string) (string, error)
+	ShortenURL(shortUrlRequest dto.ShortenURLRequest, shortUrl string) (dto.ShortenURLResponse, error)
 	RedirectUrl(shortURL string, userId int) (dto.ShortenURLResponse, error)
 }
 
 type URLShortenerService interface {
-	ShortenURL(r *http.Request, shortUrlRequest dto.ShortenURLRequest) (response.ApiResponse[dto.ShortenURLResponse])
-	RedirectUrl(r *http.Request, shortURL string, userId int) (response.ApiResponse[dto.ShortenURLResponse])
+	ShortenURL(r *http.Request, shortUrlRequest dto.ShortenURLRequest) response.ApiResponse[dto.ShortenURLResponse]
+	RedirectUrl(r *http.Request, shortURL string, userId int) response.ApiResponse[dto.ShortenURLResponse]
 }
 
 type URLShortenerHandler interface {

@@ -20,15 +20,15 @@ func NewUrlShortenerHandler(service interfaces.URLShortenerService, repo interfa
 }
 
 func (u *UrlShortenerHandler) RedirectUrlHandler(w http.ResponseWriter, r *http.Request) {
-	shortURL := r.PathValue("shortURL")
 	var body struct {
 		UserID int `json:"user_id"`
+		ShortUrl string `json:"short_url"`
 	}
 	if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
 		http.Error(w, "invalid request body", http.StatusBadRequest)
 		return
 	}
-	response := u.service.RedirectUrl(r, shortURL, body.UserID)
+	response := u.service.RedirectUrl(r, body.ShortUrl, body.UserID)
 	json.NewEncoder(w).Encode(response)
 }
 
