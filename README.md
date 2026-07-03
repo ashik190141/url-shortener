@@ -16,8 +16,7 @@
 * **41-bit timestamp** → ~69 years of IDs
 * **10-bit node identity** → 1,024 unique nodes
 * **12-bit sequence** → 4,096 IDs per millisecond per node
-* **Result:** 4M+ unique IDs/sec across the cluster with zero coordination.
 
 ### system desugn of create a url shortener
 
-<img src="https://ibb.co.com/XZLNJC8g">
+<img src="https://i.ibb.co.com/jvfB4rR2/Screenshot-2026-07-01-143316.png">
