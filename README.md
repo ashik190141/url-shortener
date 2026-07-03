@@ -18,5 +18,6 @@
 * **12-bit sequence** → 4,096 IDs per millisecond per node
 * **Result:** 4M+ unique IDs/sec across the cluster with zero coordination.
 
+### system desugn of create a url shortener
 
-<img src="https://ibb.co.com/XZLNJC8g"/>
+<img src="https://ibb.co.com/XZLNJC8g">
