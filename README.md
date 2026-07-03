@@ -20,4 +20,4 @@
 
 ### system desugn of create a url shortener
 
-<img src="https://ibb.co.com/XZLNJC8g">
+![System Design](https://ibb.co.com/XZLNJC8g)
